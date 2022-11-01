@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title> Sharkly | 백승범 소개 </title>
+
+    <style>
+        .main-body {
+            width: 95%;
+            margin: 20px auto 0px auto;
+        }
+
+        .img-area {
+            border: 1px solid lightgrey;
+            border-radius: 1px;
+        }
+
+        .img-area > img {
+            object-fit: fill;
+            width: 100%;
+            hegiht: 100%;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+
+            border: 1px solid lightgrey;
+            border-radius: 1px;
+        }
+
+        .comment-box {
+            width: 100%;
+            margin: 10px 10px -40px 10px;
+            padding: 10px;
+        }
+
+        .user-box {
+            display: flex;
+        }
+
+        .name-input {
+            width: 100px;
+            margin-right: 10px;
+        }
+
+        .comment-input {
+            max-width: 90%;
+            margin-right: 10px;
+        }
+
+        .post-btn {
+            margin-top: 10px
+        }
+
+        .ready-a {
+            float: right;
+            margin-left: 5px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            set_temp()
+            show_comment()
+        });
+
+        function set_temp() {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/weather/seoul",
+                data: {},
+                success: function (response) {
+                    $('#temp').text(response['temp'])
+                }
+            })
+        }
+
+        function save_comment() {
+            let name = $('#name').val()
+            let comment = $('#add-comment').val()
+            let password = $('#add-password').val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/bsb',
+                data: {
+                    name_give: name,
+                    comment_give: comment,
+                    password_give: password
+                },
+                success: function (response) {
+                    window.location.reload()
+                }
+            })
+        }
+
+        function show_comment() {
+            $.ajax({
+                type: "GET",
+                url: "/bsb",
+                data: {},
+                success: function (response) {
+                    let rows = response["guestbook"]
+
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['name']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<p>${comment}</p>
+                                         <footer class="blockquote-footer" id="c-${i}">${name}
+                                            <a class="ready-a" onclick="ready_delete('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
+                                            </a><a class="ready-a" onclick="ready_update('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>
+                                         </footer>`
+
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function ready_update($id) {
+            let name = $('#'+$id).clone().children().remove().end().text()
+            $('#update-name').text(name)
+        }
+
+        function update_comment() {
+            let name = $('#update-name').text()
+            let comment = $('#update-comment').val()
+            let password = $('#update-password').val()
+
+            $.ajax({
+                type: 'PATCH',
+                url: '/bsb',
+                data: {
+                    name_give: name,
+                    comment_give: comment,
+                    password_give: password
+                },
+                success: function (response) {
+                    if (response['msg'] == "비밀번호가 일치하지 않습니다") {
+                        alert(response['msg'])
+                    } else {
+                        window.location.reload()
+                    }
+                }
+            })
+        }
+
+        function ready_delete($id) {
+            let name = $('#'+$id).clone().children().remove().end().text()
+            $('#delete-name').text(name)
+        }
+
+        function delete_comment() {
+            let name = $('#delete-name').text()
+            let password = $('#delete-password').val()
+
+            $.ajax({
+                type: 'DELETE',
+                url: '/bsb',
+                data: {
+                    name_give: name,
+                    password_give: password
+                },
+                success: function (response) {
+                    $('#deleteModal').modal('hide')
+                    window.location.reload()
+                    alert(response['msg'])
+                }
+            })
+        }
+    </script>
+
+</head>
+
+<body>
+<!-- Nav Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="./main.html">Sharkly</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">현재 온도: <span id="temp"></span>℃</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+        Team 6 Mini Project
+      </span>
+        </div>
+    </div>
+</nav>
+<!-- Nav Bar -->
+
+<!-- Main body -->
+    <div class="row main-body">
+        <div class="col-md-7">
+            <div class="img-area">
+                <img src="https://sisain.co.kr/news/photo/202208/48411_87770_3550.jpg" class="img-fluid rounded-start main-image" alt="...">
+            </div>
+        </div>
+        <div class="col-md-5 text-area">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">백승범</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">멤버 소개</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <hr>
+                    <div id="comment-list">
+                    </div>
+                </div>
+                <div class="comment-box">
+                    <div class="user-box">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control name-input" id="name" placeholder="text">
+                            <label style="color: grey">Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control password-input" id="add-password" placeholder="text">
+                            <label style="color: grey">password</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-5">
+                        <input type="text" class="form-control comment-input" id="add-comment" placeholder="text">
+                        <label style="color: grey">Comment </label>
+                        <button onclick="save_comment()" type="button" class="btn btn-dark post-btn"> 게시 </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Main body -->
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">코멘트 수정하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="comment-box">
+              <div class="user-box">
+                  <div class="form-floating mb-3">
+                      <h3 id="update-name" style="margin: 10px 10px 10px 0px">Name</h3>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control password-input" id="update-password" placeholder="text">
+                      <label style="color: grey">password</label>
+                  </div>
+              </div>
+              <div class="form-floating mb-5">
+                  <input type="text" class="form-control comment-input" id="update-comment" placeholder="text">
+                  <label style="color: grey">Comment </label>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="update_comment()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Update Modal -->
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">코멘트 수정하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="comment-box">
+              <div class="user-box">
+                  <div class="form-floating mb-3">
+                      <h3 id="delete-name" style="margin: 10px 10px 10px 0px">Name</h3>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control password-input" id="delete-password" placeholder="text">
+                      <label style="color: grey">password</label>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="delete_comment()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete Modal -->
+
+</body>
+
+</html>
