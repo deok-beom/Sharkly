@@ -1,62 +1,35 @@
 from flask import Flask, render_template, request, jsonify
-from pymongo import MongoClient
-
 app = Flask(__name__)
 
-client = MongoClient('mongodb+srv://baek940dog:sparta@cluster0.jsve0rd.mongodb.net/Cluster0?retryWrites=true&w=majority')
-db = client.dbsparta
+from pymongo import MongoClient
+client = MongoClient('mongodb+srv://text:sparta@cluster0.csxr5oe.mongodb.net/@cluster0?retryWrites=true&w=majority')
+db = client.minipro
+
 
 @app.route('/')
 def home():
-    return render_template('main.html')
+    return render_template('team_first.html')
 
-@app.route('/bsb.html')
-def bsb_page():
-    return render_template('bsb.html')
 
-@app.route("/bsb", methods=["POST"])
-def bsb_guestbook_post():
+@app.route("/project", methods=["POST"])
+def project_post():
     name_receive = request.form['name_give']
     comment_receive = request.form['comment_give']
-    password_receive = request.form['password_give']
 
     doc = {
         'name': name_receive,
-        'comment': comment_receive,
-        'password': password_receive
+        'comment': comment_receive
     }
-    db.guestbook.insert_one(doc)
-    return jsonify({'msg':"성공"})
 
-@app.route("/bsb", methods=["GET"])
-def bsb_guestbook_get():
-    guestbook_list = list(db.guestbook.find({}, {'_id':False}))
-    return jsonify({'guestbook':guestbook_list})
+    db.minipro.insert_one(doc)
 
-@app.route("/bsb", methods=["PATCH"])
-def bsb_guestbook_patch():
-    name_receive = request.form['name_give'].strip()
-    comment_receive = request.form['comment_give']
-    password_receive = request.form['password_give']
+    return jsonify({'msg': '방명록을 남기셨습니다!'})
 
-    commentInfo = db.guestbook.find_one({'name': name_receive})
-    if commentInfo['password'] == password_receive:
-        db.guestbook.update_one({'name': name_receive}, {'$set': {'comment': comment_receive}})
-        return jsonify({'msg':"성공"})
-    else:
-        return jsonify({'msg':"비밀번호가 일치하지 않습니다"})
 
-@app.route("/bsb", methods=["DELETE"])
-def bsb_guestbook_delete():
-    name_receive = request.form['name_give'].strip()
-    password_receive = request.form['password_give']
-
-    commentInfo = db.guestbook.find_one({'name': name_receive})
-    if commentInfo['password'] == password_receive:
-        db.guestbook.delete_one({'name': name_receive})
-        return jsonify({'msg':"성공"})
-    else:
-        return jsonify({'msg':"비밀번호가 일치하지 않습니다"})
+@app.route("/project", methods=["GET"])
+def project_get():
+    comment_list = list(db.minipro.find({}, {'_id':False}))
+    return jsonify({'comments': comment_list})
 
 
 if __name__ == '__main__':
