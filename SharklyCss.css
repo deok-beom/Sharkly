@@ -1,0 +1,74 @@
+* {
+    font-family: 'Noto Serif KR', serif;
+}
+
+.card-wrap {
+    width: 95%;
+    max-width: 1300px;
+    margin: 20px auto 0px auto;
+}
+
+.mytitle {
+    height: 250px;
+    width: 100%;
+    max-width: 1600px;
+
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.nhm.ac.uk/content/dam/nhmwww/discover/megalodon/megalodon_warpaint_shutterstock-full-width.jpg.thumb.1160.1160.jpg");
+    background-position: center;
+    background-size: cover;
+
+    color: white;
+    font-size: 70;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-wrap {
+    width: 95%;
+    max-width: 1300px;
+    margin: 20px auto 0px auto;
+
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.main-body {
+    width: 95%;
+    margin: 20px auto 0px auto;
+}
+
+.wrap{
+    max-width: 1400px;
+    width : 95%;
+
+    margin: 60px auto 30px auto;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn > button {
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+
+.card-body > h3 {
+    font-weight: bold;
+}
+.card-body > p {
+     font-weight: bold;
+}
+
+.card-body > ul {
+    font-size: medium;
+    color: dimgray;
+}
