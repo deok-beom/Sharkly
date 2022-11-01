@@ -42,7 +42,11 @@
     margin: 20px auto 0px auto;
 }
 
-.wrap{
+.col >  * {
+    font-style: italic;
+}
+
+.mem_wrap{
     max-width: 1400px;
     width : 95%;
 
@@ -71,4 +75,8 @@
 .card-body > ul {
     font-size: medium;
     color: dimgray;
+}
+
+.img-area{
+    width: 95%;
 }
