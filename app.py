@@ -8,8 +8,27 @@ db = client.minipro
 
 @app.route('/')
 def home():
-    return render_template('team_first.html')
+    return render_template('main.html')
 
+@app.route('/song')
+def song_page():
+    return render_template('song.html')
+
+@app.route('/sung')
+def sung_page():
+    return render_template('sung.html')
+
+@app.route('/jeon')
+def jeon_page():
+    return render_template('jeon.html')
+
+@app.route('/kim')
+def kim_page():
+    return render_template('kim.html')
+
+@app.route('/baek')
+def baek_page():
+    return render_template('baek.html')
 
 @app.route("/project", methods=["POST"])
 def project_post():
