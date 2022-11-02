@@ -8,7 +8,7 @@ client_song = MongoClient('')
 db_song = client_song.dbname
 client_sung = MongoClient('mongodb+srv://text:sparta@cluster0.csxr5oe.mongodb.net/@cluster0?retryWrites=true&w=majority')
 db_sung = client_sung.dbname
-client_jeon = MongoClient('')
+client_jeon = MongoClient('mongodb+srv://test:sparta@cluster0.ntm0kz7.mongodb.net/cluster0?retryWrites=true&w=majority')
 db_jeon = client_jeon.dbname
 client_kim = MongoClient('mongodb+srv://test:sparta@cluster0.rcfiigi.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db_kim = client_kim.dbname
