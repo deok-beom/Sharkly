@@ -1,0 +1,147 @@
+* {
+    font-family: 'Noto Serif KR', serif;
+}
+
+.card1 {
+    max-width: 900px;
+
+    margin: auto;
+}
+
+.card-wrap {
+    width: 95%;
+    max-width: 1300px;
+    margin: 20px auto 0px auto;
+}
+
+.mytitle {
+    height: 250px;
+    width: 100%;
+    max-width: 900px;
+
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.nhm.ac.uk/content/dam/nhmwww/discover/megalodon/megalodon_warpaint_shutterstock-full-width.jpg.thumb.1160.1160.jpg");
+    background-position: center;
+    background-size: cover;
+
+    color: white;
+    font-size: 70px;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-wrap {
+    width: 95%;
+    max-width: 900px;
+
+    margin: 10px auto 0px auto;
+
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.card-img-top {
+    max-width: 900px;
+    max-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-body {
+    width: 95%;
+    margin: 20px auto 0px auto;
+}
+
+.col > * {
+    font-style: italic;
+}
+
+.mem_wrap {
+    margin: 10px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn > button {
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+
+.card-body > h3 {
+    font-weight: bold;
+}
+
+.card-body > p {
+    font-weight: bold;
+}
+
+.card-body > ul {
+    font-size: medium;
+    color: dimgray;
+}
+
+.img-area {
+    width: 95%;
+}
+
+/*방명록 CSS*/
+.comment {
+    max-width: 900px;
+
+    margin: auto;
+
+    display: none;
+}
+
+.up {
+    margin: auto;
+}
+
+.down {
+    max-width: 900px;
+
+    margin-top: 10px;
+
+    display: flex;
+}
+
+.down > .btn-secondary {
+    background-color: transparent;
+    color: gray;
+    border-color: gray;
+}
+
+.down > .btn-Dark {
+    background-color: transparent;
+    color: black;
+    border-color: black;
+
+    margin-left: auto;
+}
+
+.list {
+   margin-top: 10px;
+}
+
+.btn-Yw {
+    background-color: transparent;
+    color: firebrick;
+    border-color: firebrick;
+}
