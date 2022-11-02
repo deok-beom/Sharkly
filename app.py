@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 client_song = MongoClient('')
 db_song = client_song.dbname
-client_sung = MongoClient('')
+client_sung = MongoClient('mongodb+srv://text:sparta@cluster0.csxr5oe.mongodb.net/@cluster0?retryWrites=true&w=majority')
 db_sung = client_sung.dbname
 client_jeon = MongoClient('')
 db_jeon = client_jeon.dbname
-client_kim = MongoClient('')
+client_kim = MongoClient('mongodb+srv://test:sparta@cluster0.rcfiigi.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db_kim = client_kim.dbname
 client_baek = MongoClient('mongodb+srv://baek940dog:sparta@cluster0.jsve0rd.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db_baek = client_baek.dbsparta
