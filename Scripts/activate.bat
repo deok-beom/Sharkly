@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=E:\Documents\Workbench\Sparta\miniproject"
+set "VIRTUAL_ENV=E:\Documents\Workbench\Sparta\sharkly"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
