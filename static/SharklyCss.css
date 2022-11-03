@@ -150,3 +150,8 @@ a {
 .card > a > img {
     object-fit : fill;
 }
+
+textarea {
+    border: none;
+    resize: none;
+}
