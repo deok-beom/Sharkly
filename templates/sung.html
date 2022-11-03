@@ -15,125 +15,7 @@
     <title> Sharkly | 성준혁 소개 </title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/SharklyCss.css">
-
-    <script>
-        $(document).ready(function () {
-            set_temp()
-            show_comment()
-        });
-
-        function set_temp() {
-            $.ajax({
-                type: "GET",
-                url: "http://spartacodingclub.shop/sparta_api/weather/seoul",
-                data: {},
-                success: function (response) {
-                    $('#temp').text(response['temp'])
-                }
-            })
-        }
-
-        function save_comment() {
-            let name = $('#name').val()
-            let comment = $('#add-comment').val()
-            let password = $('#add-password').val()
-
-            $.ajax({
-                type: 'POST',
-                url: '/sung-api',
-                data: {
-                    name_give: name,
-                    comment_give: comment,
-                    password_give: password
-                },
-                success: function (response) {
-                    window.location.reload()
-                }
-            })
-        }
-
-        function show_comment() {
-            $.ajax({
-                type: "GET",
-                url: "/sung-api",
-                data: {},
-                success: function (response) {
-                    let rows = response["guestbook"]
-
-                    for (let i = 0; i < rows.length; i++) {
-                        let name = rows[i]['name']
-                        let comment = rows[i]['comment']
-
-                        let temp_html = `<p>${comment}</p>
-                                         <footer class="blockquote-footer" id="c-${i}">${name}
-                                            <a class="ready-a" onclick="ready_delete('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
-                                            </a><a class="ready-a" onclick="ready_update('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>
-                                         </footer>`
-
-                        $('#comment-list').append(temp_html)
-                    }
-                }
-            });
-        }
-
-        function ready_update($id) {
-            let name = $('#'+$id).clone().children().remove().end().text()
-            $('#update-name').text(name)
-        }
-
-        function update_comment() {
-            let name = $('#update-name').text()
-            let comment = $('#update-comment').val()
-            let password = $('#update-password').val()
-
-            $.ajax({
-                type: 'PATCH',
-                url: '/sung-api',
-                data: {
-                    name_give: name,
-                    comment_give: comment,
-                    password_give: password
-                },
-                success: function (response) {
-                    if (!response['success']) {
-                        alert("비밀번호가 틀립니다.")
-                    } else {
-                        window.location.reload()
-                        alert("수정 완료")
-                    }
-                }
-            })
-        }
-
-        function ready_delete($id) {
-            let name = $('#'+$id).clone().children().remove().end().text()
-            $('#delete-name').text(name)
-        }
-
-        function delete_comment() {
-            let name = $('#delete-name').text()
-            let password = $('#delete-password').val()
-
-            $.ajax({
-                type: 'DELETE',
-                url: '/sung-api',
-                data: {
-                    name_give: name,
-                    password_give: password
-                },
-                success: function (response) {
-                    if (!response['success']) {
-                        alert("비밀번호가 틀립니다.")
-                    } else {
-                        $('#deleteModal').modal('hide')
-                        window.location.reload()
-                        alert("삭제 완료")
-                    }
-                }
-            })
-        }
-    </script>
-
+    <script src="{{url_for('static', filename='Sharklyjs.js')}}"></script>
 </head>
 
 <body>
@@ -151,7 +33,8 @@
 <!-- Main body -->
 <div class="mem-wrap">
     <div class="card">
-        <img src="https://w.namu.la/s/03eb9bb0c58bb4ce37d6ed543bbc665cb47c8d9f4a0160f8f2ff9c10d969c3d502db56a880b5648b5904efebd22bc878c04b27dccf3a715630a13a888e69051bb82dd3898897ab8452060913c9f1de6ac94330869a3f572f2faf8a60dcd0e6f93cb6b7d8d63582d2ed75fd1f060ed93d" class="card-img-top" alt="고래 상어">
+        <img src="https://w.namu.la/s/03eb9bb0c58bb4ce37d6ed543bbc665cb47c8d9f4a0160f8f2ff9c10d969c3d502db56a880b5648b5904efebd22bc878c04b27dccf3a715630a13a888e69051bb82dd3898897ab8452060913c9f1de6ac94330869a3f572f2faf8a60dcd0e6f93cb6b7d8d63582d2ed75fd1f060ed93d"
+             class="card-img-top" alt="고래 상어">
         <div class="card-body">
             <h3 class="card-title">성준혁</h3>
             <div class="card-text">
@@ -179,7 +62,9 @@
             </div>
 
             <div class="btn">
-                <button onclick="location.href='https://velog.io/@zliean'" type="button" class="btn btn-outline-success">블로그</button>
+                <button onclick="location.href='https://velog.io/@zliean'" type="button"
+                        class="btn btn-outline-success">블로그
+                </button>
                 <button onclick="window.open('#');" type="button" class="btn btn-outline-primary">인스타그램</button>
             </div>
 
@@ -202,16 +87,16 @@
             <div class="user-box">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control name-input" id="name" placeholder="text">
-                    <label style="color: grey">Name</label>
+                    <label style="color: grey">이름</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control password-input" id="add-password" placeholder="text">
-                    <label style="color: grey">password</label>
+                    <label style="color: grey">암호</label>
                 </div>
             </div>
             <div class="form-floating mb-5">
                 <input type="text" class="form-control comment-input" id="add-comment" placeholder="text">
-                <label style="color: grey">Comment </label>
+                <label style="color: grey">내용 </label>
                 <button onclick="save_comment()" type="button" class="btn btn-dark post-btn"> 게시</button>
             </div>
         </div>
@@ -221,65 +106,67 @@
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="updateModalLabel">코멘트 수정하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <div class="comment-box">
-              <div class="user-box">
-                  <div class="form-floating mb-3">
-                      <h3 id="update-name" style="margin: 10px 10px 10px 0px">Name</h3>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control password-input" id="update-password" placeholder="text">
-                      <label style="color: grey">password</label>
-                  </div>
-              </div>
-              <div class="form-floating mb-5">
-                  <input type="text" class="form-control comment-input" id="update-comment" placeholder="text">
-                  <label style="color: grey">Comment </label>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="update_comment()">Save changes</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">코멘트 수정하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="comment-box">
+                    <div class="user-box">
+                        <div class="form-floating mb-3">
+                            <h3 id="update-name" style="margin: 10px 10px 10px 0px">이름</h3>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control password-input" id="update-password"
+                                   placeholder="text">
+                            <label style="color: grey">암호</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-5">
+                        <input type="text" class="form-control comment-input" id="update-comment" placeholder="text">
+                        <label style="color: grey">내용 </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="update_comment()">수정</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Update Modal -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">코멘트 수정하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <div class="comment-box">
-              <div class="user-box">
-                  <div class="form-floating mb-3">
-                      <h3 id="delete-name" style="margin: 10px 10px 10px 0px">Name</h3>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control password-input" id="delete-password" placeholder="text">
-                      <label style="color: grey">password</label>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="delete_comment()">Delete</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">코멘트 삭제하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="comment-box">
+                    <div class="user-box">
+                        <div class="form-floating mb-3">
+                            <h3 id="delete-name" style="margin: 10px 10px 10px 0px">이름</h3>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control password-input" id="delete-password"
+                                   placeholder="text">
+                            <label style="color: grey">암호</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="delete_comment()">삭제</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Delete Modal -->
 </body>
