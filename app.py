@@ -4,8 +4,8 @@ import method
 
 app = Flask(__name__)
 
-#client_song = MongoClient('')
-#db_song = client_song.dbname
+client_song = MongoClient('mongodb+srv://SongJiEun:tmvkfmxk@cluster0.6burhgx.mongodb.net/?retryWrites=true&w=majority')
+db_song = client_song.dbname
 client_sung = MongoClient('mongodb+srv://text:sparta@cluster0.csxr5oe.mongodb.net/@cluster0?retryWrites=true&w=majority')
 db_sung = client_sung.dbname
 client_jeon = MongoClient('mongodb+srv://test:sparta@cluster0.ntm0kz7.mongodb.net/cluster0?retryWrites=true&w=majority')

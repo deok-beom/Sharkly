@@ -33,10 +33,16 @@
     border-radius: 5px;
 }
 
+.main-img {
+    height: 500px;
+    object-fit: cover;
+    object-position: 30%;
+}
+
 .card-body > h3 {
     font-weight: bold;
 }
-.card-body > p {
+.card-body > p > span {
      font-weight: bold;
 }
 
@@ -52,8 +58,9 @@
 }
 
 .card > a > img {
-    height: 200px;
+    height: 250px;
     object-fit: cover;
+    object-position: 30%;
 }
 
 .col >  * {
@@ -104,7 +111,7 @@
 }
 
 .user-box {
-    margin-top: -40px;
+    margin-top: -20px;
     display: flex;
 }
 
