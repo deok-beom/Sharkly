@@ -44,11 +44,13 @@ function show_comment() {
             for (let i = 0; i < rows.length; i++) {
                 let name = rows[i]['name']
                 let comment = rows[i]['comment']
+                let id = rows[i]['_id']
 
                 let temp_html = `<p>${comment}</p>
+                                 <input type="hidden" id="id-${i}" value="${id}">
                                          <footer class="blockquote-footer" id="c-${i}">${name}
-                                            <a class="ready-a" onclick="ready_delete('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
-                                            </a><a class="ready-a" onclick="ready_update('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>
+                                            <a class="ready-a" onclick="ready_delete('${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
+                                            </a><a class="ready-a" onclick="ready_update('${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>
                                          </footer>`
 
                 $('#comment-list').append(temp_html)
