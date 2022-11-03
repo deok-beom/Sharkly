@@ -44,12 +44,13 @@ function show_comment() {
             for (let i = 0; i < rows.length; i++) {
                 let name = rows[i]['name']
                 let comment = rows[i]['comment']
+                let id = rows[i]['_id']
 
                 let temp_html = `<p>${comment}</p>
-                                 <input type="hidden" id="id-${i}">
+                                 <input type="hidden" id="id-${i}" value="${id}">
                                          <footer class="blockquote-footer" id="c-${i}">${name}
-                                            <a class="ready-a" onclick="ready_delete('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
-                                            </a><a class="ready-a" onclick="ready_update('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>
+                                            <a class="ready-a" onclick="ready_delete('${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
+                                            </a><a class="ready-a" onclick="ready_update('${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>
                                          </footer>`
 
                 $('#comment-list').append(temp_html)
@@ -58,13 +59,15 @@ function show_comment() {
     });
 }
 
-function ready_update($id) {
-    let name = $('#' + $id).clone().children().remove().end().text()
+function ready_update($index) {
+    let name = $('#c-' + $index).clone().children().remove().end().text()
+    let id = $('#id-' + $index).val()
     $('#update-name').text(name)
+    $('#update-id').val(id)
 }
 
 function update_comment() {
-    let name = $('#update-name').text()
+    let id = $('#update-id').val()
     let comment = $('#update-comment').val()
     let password = $('#update-password').val()
 
@@ -72,7 +75,7 @@ function update_comment() {
         type: 'PATCH',
         url: '/baek-api',
         data: {
-            name_give: name,
+            id_give: id,
             comment_give: comment,
             password_give: password
         },
@@ -87,20 +90,22 @@ function update_comment() {
     })
 }
 
-function ready_delete($id) {
-    let name = $('#' + $id).clone().children().remove().end().text()
+function ready_delete($index) {
+    let name = $('#c-' + $index).clone().children().remove().end().text()
+    let id = $('#id-' + $index).val()
     $('#delete-name').text(name)
+    $('#delete-id').val(id)
 }
 
 function delete_comment() {
-    let name = $('#delete-name').text()
+    let id = $('#delete-id').val()
     let password = $('#delete-password').val()
 
     $.ajax({
         type: 'DELETE',
         url: '/baek-api',
         data: {
-            name_give: name,
+            id_give: id,
             password_give: password
         },
         success: function (response) {

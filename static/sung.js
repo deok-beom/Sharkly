@@ -57,13 +57,15 @@ function show_comment() {
     });
 }
 
-function ready_update($id) {
-    let name = $('#' + $id).clone().children().remove().end().text()
+function ready_update($index) {
+    let name = $('#c-' + $index).clone().children().remove().end().text()
+    let id = $('#id-' + $index).val()
     $('#update-name').text(name)
+    $('#update-id').val(id)
 }
 
 function update_comment() {
-    let name = $('#update-name').text()
+    let id = $('#update-id').val()
     let comment = $('#update-comment').val()
     let password = $('#update-password').val()
 
@@ -71,7 +73,7 @@ function update_comment() {
         type: 'PATCH',
         url: '/sung-api',
         data: {
-            name_give: name,
+            id_give: id,
             comment_give: comment,
             password_give: password
         },
@@ -86,20 +88,22 @@ function update_comment() {
     })
 }
 
-function ready_delete($id) {
-    let name = $('#' + $id).clone().children().remove().end().text()
+function ready_delete($index) {
+    let name = $('#c-' + $index).clone().children().remove().end().text()
+    let id = $('#id-' + $index).val()
     $('#delete-name').text(name)
+    $('#delete-id').val(id)
 }
 
 function delete_comment() {
-    let name = $('#delete-name').text()
+    let id = $('#delete-id').val()
     let password = $('#delete-password').val()
 
     $.ajax({
         type: 'DELETE',
         url: '/sung-api',
         data: {
-            name_give: name,
+            id_give: id,
             password_give: password
         },
         success: function (response) {

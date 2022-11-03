@@ -1,40 +1,31 @@
+from bson.objectid import ObjectId
+
 def guestbook_get(database):
-    return list(database.guestbook.find({}, {'_id': False}))
+    return list(database.guestbook.find({}))
 
 
 def guestbook_post(database, name, comment, password):
-    name_receive = name
-    comment_receive = comment
-    password_receive = password
-
     doc = {
-        'name': name_receive,
-        'comment': comment_receive,
-        'password': password_receive
+        'name': name,
+        'comment': comment,
+        'password': password
     }
     database.guestbook.insert_one(doc)
 
 
-def guestbook_patch(database, name, comment, password):
-    name_receive = name
-    comment_receive = comment
-    password_receive = password
-
-    comment_info = database.guestbook.find_one({'name': name_receive})
-    if comment_info['password'] == password_receive:
-        database.guestbook.update_one({'name': name_receive}, {'$set': {'comment': comment_receive}})
+def guestbook_patch(database, id, comment, password):
+    comment_info = database.guestbook.find_one({'_id': ObjectId(id)})
+    if comment_info['password'] == password:
+        database.guestbook.update_one({'_id': ObjectId(id)}, {'$set': {'comment': comment}})
         return True
     else:
         return False
 
 
-def guestbook_delete(database, name, password):
-    name_receive = name
-    password_receive = password
-
-    comment_info = database.guestbook.find_one({'name': name_receive})
-    if comment_info['password'] == password_receive:
-        database.guestbook.delete_one({'name': name_receive})
+def guestbook_delete(database, id, password):
+    comment_info = database.guestbook.find_one({'_id': ObjectId(id)})
+    if comment_info['password'] == password:
+        database.guestbook.delete_one({'_id': ObjectId(id)})
         return True
     else:
         return False

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import method
 
 app = Flask(__name__)
@@ -39,14 +40,14 @@ def song_guestbook_get():
 
 
 @app.route("/song-api", methods=["PATCH"])
-def song_guestbook_patch():
-    b_Success = method.guestbook_patch(db_song, request.form['name_give'].strip(), request.form['comment_give'], request.form['password_give'])
+def baek_guestbook_patch():
+    b_Success = method.guestbook_patch(db_song, request.form['id_give'], request.form['comment_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 
 @app.route("/song-api", methods=["DELETE"])
-def song_guestbook_delete():
-    b_Success = method.guestbook_delete(db_song, request.form['name_give'].strip(), request.form['password_give'])
+def baek_guestbook_delete():
+    b_Success = method.guestbook_delete(db_song, request.form['id_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 @app.route('/sung')
@@ -67,14 +68,14 @@ def sung_guestbook_get():
 
 
 @app.route("/sung-api", methods=["PATCH"])
-def sung_guestbook_patch():
-    b_Success = method.guestbook_patch(db_sung, request.form['name_give'].strip(), request.form['comment_give'], request.form['password_give'])
+def baek_guestbook_patch():
+    b_Success = method.guestbook_patch(db_sung, request.form['id_give'], request.form['comment_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 
 @app.route("/sung-api", methods=["DELETE"])
-def sung_guestbook_delete():
-    b_Success = method.guestbook_delete(db_sung, request.form['name_give'].strip(), request.form['password_give'])
+def baek_guestbook_delete():
+    b_Success = method.guestbook_delete(db_sung, request.form['id_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 @app.route('/jeon')
@@ -95,14 +96,14 @@ def jeon_guestbook_get():
 
 
 @app.route("/jeon-api", methods=["PATCH"])
-def jeon_guestbook_patch():
-    b_Success = method.guestbook_patch(db_jeon, request.form['name_give'].strip(), request.form['comment_give'], request.form['password_give'])
+def baek_guestbook_patch():
+    b_Success = method.guestbook_patch(db_jeon, request.form['id_give'], request.form['comment_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 
 @app.route("/jeon-api", methods=["DELETE"])
-def jeon_guestbook_delete():
-    b_Success = method.guestbook_delete(db_jeon, request.form['name_give'].strip(), request.form['password_give'])
+def baek_guestbook_delete():
+    b_Success = method.guestbook_delete(db_jeon, request.form['id_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 @app.route('/kim')
@@ -123,14 +124,14 @@ def kim_guestbook_get():
 
 
 @app.route("/kim-api", methods=["PATCH"])
-def kim_guestbook_patch():
-    b_Success = method.guestbook_patch(db_kim, request.form['name_give'].strip(), request.form['comment_give'], request.form['password_give'])
+def baek_guestbook_patch():
+    b_Success = method.guestbook_patch(db_kim, request.form['id_give'], request.form['comment_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 
 @app.route("/kim-api", methods=["DELETE"])
-def kim_guestbook_delete():
-    b_Success = method.guestbook_delete(db_kim, request.form['name_give'].strip(), request.form['password_give'])
+def baek_guestbook_delete():
+    b_Success = method.guestbook_delete(db_kim, request.form['id_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 @app.route('/baek')
@@ -147,18 +148,21 @@ def baek_guestbook_post():
 @app.route("/baek-api", methods=["GET"])
 def baek_guestbook_get():
     guestbook_list = method.guestbook_get(db_baek)
+    for i in range(0, len(guestbook_list)):
+        guestbook_list[i]['_id'] = str(guestbook_list[i]['_id'])
+
     return jsonify({'guestbook': guestbook_list})
 
 
 @app.route("/baek-api", methods=["PATCH"])
 def baek_guestbook_patch():
-    b_Success = method.guestbook_patch(db_baek, request.form['name_give'].strip(), request.form['comment_give'], request.form['password_give'])
+    b_Success = method.guestbook_patch(db_baek, request.form['id_give'], request.form['comment_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 
 @app.route("/baek-api", methods=["DELETE"])
 def baek_guestbook_delete():
-    b_Success = method.guestbook_delete(db_baek, request.form['name_give'].strip(), request.form['password_give'])
+    b_Success = method.guestbook_delete(db_baek, request.form['id_give'], request.form['password_give'])
     return jsonify({'success': b_Success})
 
 
