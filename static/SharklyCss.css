@@ -69,6 +69,10 @@
 
 
 /* 멤버 소개 페이지 CSS */
+a:link {
+    text-decoration: none;
+}
+
 .mem-wrap{
     max-width: 1400px;
     width : 95%;
@@ -112,6 +116,7 @@
 
 .user-box {
     margin-top: -20px;
+    margin-bottom: 20px;
     display: flex;
 }
 
