@@ -216,17 +216,17 @@
             <div class="user-box">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control name-input" id="name" placeholder="text">
-                    <label style="color: grey">Name</label>
+                    <label style="color: grey">이름</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control password-input" id="add-password" placeholder="text">
-                    <label style="color: grey">password</label>
+                    <label style="color: grey">암호</label>
                 </div>
             </div>
             <div class="form-floating mb-5">
                 <input type="text" class="form-control comment-input" id="add-comment" placeholder="text">
-                <label style="color: grey">Comment </label>
-                <button onclick="save_comment()" type="button" class="btn btn-outline-dark post-btn"> 게시</button>
+                <label style="color: grey">내용 </label>
+                <button onclick="save_comment()" type="button" class="btn btn-dark post-btn"> 게시</button>
             </div>
         </div>
     </div>
@@ -245,23 +245,23 @@
                 <div class="comment-box">
                     <div class="user-box">
                         <div class="form-floating mb-3">
-                            <h3 id="update-name" style="margin: 10px 10px 10px 0px">Name</h3>
+                            <h3 id="update-name" style="margin: 10px 10px 10px 0px">이름</h3>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control password-input" id="update-password"
                                    placeholder="text">
-                            <label style="color: grey">password</label>
+                            <label style="color: grey">암호</label>
                         </div>
                     </div>
                     <div class="form-floating mb-5">
                         <input type="text" class="form-control comment-input" id="update-comment" placeholder="text">
-                        <label style="color: grey">Comment </label>
+                        <label style="color: grey">내용 </label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline-primary" onclick="update_comment()">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="update_comment()">수정</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
             </div>
         </div>
     </div>
@@ -280,19 +280,19 @@
                 <div class="comment-box">
                     <div class="user-box">
                         <div class="form-floating mb-3">
-                            <h3 id="delete-name" style="margin: 10px 10px 10px 0px">Name</h3>
+                            <h3 id="delete-name" style="margin: 10px 10px 10px 0px">이름</h3>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control password-input" id="delete-password"
                                    placeholder="text">
-                            <label style="color: grey">password</label>
+                            <label style="color: grey">암호</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline-primary" onclick="delete_comment()">Delete</button>
+                <button type="button" class="btn btn-primary" onclick="delete_comment()">삭제</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
             </div>
         </div>
     </div>
