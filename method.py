@@ -1,7 +1,7 @@
 from bson.objectid import ObjectId
 
 def guestbook_get(database):
-    return list(database.guestbook.find({}))
+    return list(database.guestbook.find())
 
 
 def guestbook_post(database, name, comment, password):
