@@ -46,6 +46,7 @@ function show_comment() {
                 let comment = rows[i]['comment']
 
                 let temp_html = `<p>${comment}</p>
+                                 <input type="hidden" id="id-${i}">
                                          <footer class="blockquote-footer" id="c-${i}">${name}
                                             <a class="ready-a" onclick="ready_delete('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제
                                             </a><a class="ready-a" onclick="ready_update('c-${i}')" href="#" data-bs-toggle="modal" data-bs-target="#updateModal">수정</a>

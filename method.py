@@ -1,5 +1,5 @@
 def guestbook_get(database):
-    return list(database.guestbook.find({}))
+    return list(database.guestbook.find({}, {'_id': False}))
 
 
 def guestbook_post(database, name, comment, password):
