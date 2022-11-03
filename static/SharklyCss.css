@@ -133,3 +133,8 @@
     float: right;
     margin-left: 5px;
 }
+
+a {
+    color: dimgray;
+    text-decoration: none;
+}
