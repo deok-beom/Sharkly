@@ -77,7 +77,7 @@
         }
 
         function ready_update($id) {
-            let name = $('#'+$id).clone().children().remove().end().text()
+            let name = $('#' + $id).clone().children().remove().end().text()
             $('#update-name').text(name)
         }
 
@@ -106,7 +106,7 @@
         }
 
         function ready_delete($id) {
-            let name = $('#'+$id).clone().children().remove().end().text()
+            let name = $('#' + $id).clone().children().remove().end().text()
             $('#delete-name').text(name)
         }
 
@@ -151,7 +151,8 @@
 <!-- Main body -->
 <div class="mem-wrap">
     <div class="card">
-        <img src="https://www.fau.edu/newsdesk/images/news/epaulette-shark-newsdesk.jpg" class="card-img-top" alt="에폴렛 상어">
+        <img src="https://www.fau.edu/newsdesk/images/news/epaulette-shark-newsdesk.jpg" class="card-img-top"
+             alt="에폴렛 상어">
         <div class="card-body">
             <h3 class="card-title">송지은</h3>
             <div class="card-text">
@@ -180,7 +181,9 @@
 
             <div class="btn">
                 <button onclick="location.href='블로그url'" type="button" class="btn btn-outline-success">블로그</button>
-                <button onclick="window.open('https://www.instagram.com/ssong_____g/');" type="button" class="btn btn-outline-primary">인스타그램</button>
+                <button onclick="window.open('https://www.instagram.com/ssong_____g/');" type="button"
+                        class="btn btn-outline-primary">인스타그램
+                </button>
             </div>
 
         </div>
@@ -202,17 +205,17 @@
             <div class="user-box">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control name-input" id="name" placeholder="text">
-                    <label style="color: grey">Name</label>
+                    <label style="color: grey">이름</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control password-input" id="add-password" placeholder="text">
-                    <label style="color: grey">password</label>
+                    <label style="color: grey">암호</label>
                 </div>
             </div>
             <div class="form-floating mb-5">
                 <input type="text" class="form-control comment-input" id="add-comment" placeholder="text">
-                <label style="color: grey">Comment </label>
-                <button onclick="save_comment()" type="button" class="btn btn-outline-dark post-btn"> 게시</button>
+                <label style="color: grey">내용 </label>
+                <button onclick="save_comment()" type="button" class="btn btn-dark post-btn"> 게시</button>
             </div>
         </div>
     </div>
@@ -221,65 +224,67 @@
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="updateModalLabel">코멘트 수정하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <div class="comment-box">
-              <div class="user-box">
-                  <div class="form-floating mb-3">
-                      <h3 id="update-name" style="margin: 10px 10px 10px 0px">Name</h3>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control password-input" id="update-password" placeholder="text">
-                      <label style="color: grey">password</label>
-                  </div>
-              </div>
-              <div class="form-floating mb-5">
-                  <input type="text" class="form-control comment-input" id="update-comment" placeholder="text">
-                  <label style="color: grey">Comment </label>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary" onclick="update_comment()">Save changes</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">코멘트 수정하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="comment-box">
+                    <div class="user-box">
+                        <div class="form-floating mb-3">
+                            <h3 id="update-name" style="margin: 10px 10px 10px 0px">이름</h3>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control password-input" id="update-password"
+                                   placeholder="text">
+                            <label style="color: grey">암호</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-5">
+                        <input type="text" class="form-control comment-input" id="update-comment" placeholder="text">
+                        <label style="color: grey">내용 </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="update_comment()">수정</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Update Modal -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">코멘트 삭제하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <div class="comment-box">
-              <div class="user-box">
-                  <div class="form-floating mb-3">
-                      <h3 id="delete-name" style="margin: 10px 10px 10px 0px">Name</h3>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control password-input" id="delete-password" placeholder="text">
-                      <label style="color: grey">password</label>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary" onclick="delete_comment()">Delete</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">코멘트 삭제하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="comment-box">
+                    <div class="user-box">
+                        <div class="form-floating mb-3">
+                            <h3 id="delete-name" style="margin: 10px 10px 10px 0px">이름</h3>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control password-input" id="delete-password"
+                                   placeholder="text">
+                            <label style="color: grey">암호</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="delete_comment()">삭제</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Delete Modal -->
 </body>
