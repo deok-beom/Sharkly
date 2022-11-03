@@ -116,7 +116,7 @@ a:link {
 .user-box {
     margin-top: -20px;
     margin-bottom: 0px;
-    display: row;
+    display: flex;
 }
 
 .form-control {
@@ -130,6 +130,7 @@ a:link {
 
 .comment-input {
     max-width: 90%;
+
     margin-right: 10px;
 }
 
@@ -154,4 +155,8 @@ a {
 textarea {
     border: none;
     resize: none;
+}
+
+.password-input {
+    width: 150px;
 }
