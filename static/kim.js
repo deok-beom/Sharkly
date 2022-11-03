@@ -19,6 +19,17 @@ function save_comment() {
     let comment = $('#add-comment').val()
     let password = $('#add-password').val()
 
+    if (name.trim() == '') {
+        alert("이름을 입력해주세요")
+        return
+    } else if (password.trim() == '') {
+        alert("비밀번호를 입력해주세요")
+        return
+    } else if (comment.trim() == '') {
+        alert("내용을 입력해주세요")
+        return
+    }
+
     $.ajax({
         type: 'POST',
         url: '/kim-api',
@@ -27,7 +38,7 @@ function save_comment() {
             comment_give: comment,
             password_give: password
         },
-        success: function (response) {
+        success: function () {
             window.location.reload()
         }
     })
@@ -71,6 +82,14 @@ function update_comment() {
     let comment = $('#update-comment').val()
     let password = $('#update-password').val()
 
+    if (password.trim() == '') {
+        alert("패스워드를 입력해주세요")
+        return
+    } else if (comment.trim() == '') {
+        alert("수정할 내용을 입력해주세요")
+        return
+    }
+
     $.ajax({
         type: 'PATCH',
         url: '/kim-api',
@@ -100,6 +119,11 @@ function ready_delete($index) {
 function delete_comment() {
     let id = $('#delete-id').val()
     let password = $('#delete-password').val()
+
+    if (password.trim() == '') {
+        alert("패스워드를 입력해주세요")
+        return
+    }
 
     $.ajax({
         type: 'DELETE',
