@@ -115,8 +115,12 @@ a:link {
 
 .user-box {
     margin-top: -20px;
-    margin-bottom: 20px;
-    display: flex;
+    margin-bottom: 0px;
+    display: row;
+}
+
+.form-control {
+    margin-bottom: 30px;
 }
 
 .name-input {
