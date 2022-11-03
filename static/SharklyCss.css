@@ -74,6 +74,10 @@
     object-fit: cover;
 }
 
+.card-text > div > span {
+    font-weight: bold;
+}
+
 .btn {
     display: flex;
     flex-direction: row;
